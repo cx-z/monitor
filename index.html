@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Monitor</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript"> var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="../static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+  <script type="text/javascript">
+    var select;
+    function shift(object){
+        if(object.value=="start"){
+            select=setInterval(function(){postInfo();},1000);
+            object.value="stop";
+        }else{
+            clearInterval(select);
+            select=null;
+            object.value="start";
+        }
+    }
+    
+    function postInfo(){
+		$.ajax({
+			type: "GET",
+			url: $SCRIPT_ROOT + '/get_vars',
+			dataType: "json",
+			success: function(data) {
+			    console.log(data);
+				$("#show-numbers").html(data.vars.a.value);		//绑定数据
+                $("#show-pictures").html(html='<img src="data:image/jpg;base64,'+data.vars.image.value+'">');
+				}, 
+			error: function(error) {
+				$("#show-numbers").html("error");
+                $("#show-pictures").html("error");
+				}
+		});    
+	} 
+    
+  </script>
+</head>
+<body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Monitor</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href={{ url_for('logout') }}>Logout</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href={{ url_for('logout') }}>Logout</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2">Display Datas</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">This is our first project in SysLab</h5>
+        </div>
+        <div class="row center">
+          <input type="button" id="download-button" class="btn-large waves-effect waves-light teal lighten-1" onclick="shift(this)" value="start"></input>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="../static/background1.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Numbers</h5>
+            <center>
+              <br>
+              <p id="show-numbers" class="light"></p>
+            </center>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">Users</h5>
+
+            <p class="light">
+              <ul class="name">张辰轩</ul>
+              <ul class="name">谢子轩</ul>
+              <ul class="name">田凯彬</ul>
+            </p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Pictures</h5>
+            <center><p id="show-pictures" class="light"></p></center>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light"></h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="../static/background2.jpg" alt="Unsplashed background img 2"></div>
+  </div>
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="../static/js/materialize.js"></script>
+  <script src="../static/js/init.js"></script>
+
+  </body>
+</html>
