@@ -1,0 +1,17 @@
+<!doctype html>
+<title>Flaskr</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static',filename='style.css') }}">
+<div class=page>
+	<h1>Monitor</h1>
+	<h2>Login</h2>
+	{% if error %}<p class=error><strong>Error:</strong>{{ error }}{% endif %}
+	<form method='post'>
+		<dl>
+			<dt>Username:
+			<dd><input type=text name=username>
+			<dt>Password:
+			<dd><input type=password name=password>
+			<dd><input type=submit value=Login>
+		</dl>
+	</form>
+</div>
