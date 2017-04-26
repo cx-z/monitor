@@ -12,7 +12,18 @@
   <link href="../static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   
   <script type="text/javascript">
-    setInterval(function(){postInfo();},1000);
+    var select;
+    function shift(object){
+        if(object.value=="start"){
+            select=setInterval(function(){postInfo();},1000);
+            object.value="stop";
+        }else{
+            clearInterval(select);
+            select=null;
+            object.value="start";
+        }
+    }
+    
     function postInfo(){
 		$.ajax({
 			type: "GET",
@@ -20,15 +31,16 @@
 			dataType: "json",
 			success: function(data) {
 			    console.log(data);
-				$("#show-data").html(data.a);		//绑定数据
-//				$(".class名").val(data);		//给input表单绑定数据
+				$("#show-numbers").html(data.vars.a.value);		//绑定数据
+                $("#show-pictures").html(html='<img src="data:image/jpg;base64,'+data.vars.image.value+'">');
 				}, 
 			error: function(error) {
-				$("#show-data").html("error");
+				$("#show-numbers").html("error");
+                $("#show-pictures").html("error");
 				}
-		});
-        
+		});    
 	} 
+    
   </script>
 </head>
 <body>
@@ -36,11 +48,11 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">Monitor</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
+        <li><a href={{ url_for('logout') }}>Logout</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
+        <li><a href={{ url_for('logout') }}>Logout</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -55,7 +67,7 @@
           <h5 class="header col s12 light">This is our first project in SysLab</h5>
         </div>
         <div class="row center">
-          <a href="#" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Started</a>
+          <input type="button" id="download-button" class="btn-large waves-effect waves-light teal lighten-1" onclick="shift(this)" value="start"></input>
         </div>
         <br><br>
 
@@ -76,7 +88,7 @@
             <h5 class="center">Numbers</h5>
             <center>
               <br>
-              <p id="show-data" class="light"></p>
+              <p id="show-numbers" class="light"></p>
             </center>
           </div>
         </div>
@@ -97,9 +109,8 @@
         <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-            <h5 class="center">Easy to work with</h5>
-
-            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+            <h5 class="center">Pictures</h5>
+            <center><p id="show-pictures" class="light"></p></center>
           </div>
         </div>
       </div>
