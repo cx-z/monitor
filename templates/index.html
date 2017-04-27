@@ -44,6 +44,14 @@
   </script>
 </head>
 <body>
+  <div class=metanav>
+	{% if not session.logged_in %}
+        <br><br><br>
+        <center>
+        <a href="{{ url_for('login') }}" >log in</a>
+        </center>
+	{% else %}
+	
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">Monitor</a>
@@ -136,7 +144,7 @@
         <div class="col l3 s12">
           <h5 class="white-text">Settings</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link</a></li>
           </ul>
         </div>
       </div>
@@ -150,5 +158,8 @@
   <script src="../static/js/materialize.js"></script>
   <script src="../static/js/init.js"></script>
 
+  {% endif %}
+	</div>
+  
   </body>
 </html>
