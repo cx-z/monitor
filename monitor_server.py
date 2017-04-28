@@ -21,10 +21,12 @@ app.config.update(dict(
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
+global user
 user='admin'
 
 @app.route('/',methods=['GET','POST'])
 def login():
+    global user
     error=None
     if request.method=='POST':
         if not app.config['DICR_USERS'].has_key(request.form['username']):
@@ -37,13 +39,16 @@ def login():
             session['logged_in']=True
             app.config['USER_SOLE'][request.form['username']]='false'
             user=request.form['username']
+            print user+"刚转完"
             return redirect(url_for('index'))
     return render_template('login.html',error=error)
     
 @app.route('/logout')
 def logout():
     session.pop('logged_in',None)
+    print user
     app.config['USER_SOLE'][user]='true'
+    print app.config['USER_SOLE'][user]
     return redirect(url_for('login'))
     
 @app.route('/display')
