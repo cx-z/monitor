@@ -22,6 +22,8 @@
     <body>
         <div class="page-container">
             <h1>Login</h1>
+            <br>
+            {% if error %}<h2 class=errors>Error:{{ error }}{% endif %}</h2>
             <form action="" method="post">
                 <input type="text" name="username" class="username" placeholder="Username">
                 <input type="password" name="password" class="password" placeholder="Password">
