@@ -13,14 +13,16 @@
   
   <script type="text/javascript">
     var select;
-    function shift(object){
-        if(object.value=="start"){
+    function shift(){
+        object=$("#download-button")
+    
+        if(object.attr("value")=="start"){
             select=setInterval(function(){postInfo();},1000);
-            object.value="stop";
+            object.attr("value", "stop");
         }else{
             clearInterval(select);
             select=null;
-            object.value="start";
+            object.attr("value", "start");
         }
     }
     
@@ -40,6 +42,8 @@
 				}
 		});    
 	} 
+    
+    
     
   </script>
 </head>
@@ -78,8 +82,8 @@
         <div class="row center">
           <h5 class="header col s12 light">This is our first project in SysLab</h5>
         </div>
-        <div class="row center">
-          <input type="button" id="download-button" class="btn-large waves-effect waves-light teal lighten-1" onclick="shift(this)" value="start"></input>
+        <div class="row center" onclick="shift(this)" >
+          <input type="button" id="download-button" class="btn-large waves-effect waves-light teal lighten-1" value="start"></input>
         </div>
         <br><br>
 
