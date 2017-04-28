@@ -66,3 +66,27 @@ footer.page-footer {
 	text-align:center;
 	color:blue;
 }
+#invalid{
+    font-size:300%;
+    font-weight:bold;
+	vertical-align:center;
+	text-align:center;
+	color:red;
+}
+#jump{
+    font-size:300%;
+    text-align:center;
+}
+div#div1{ 
+position:fixed; 
+top:0; 
+left:0; 
+bottom:0; 
+right:0; 
+z-index:-1; 
+} 
+div#div1 > img { 
+height:100%; 
+width:100%; 
+border:0; 
+} 
