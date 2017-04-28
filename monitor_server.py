@@ -4,6 +4,10 @@ from flask.templating import render_template
 
 from storage import table
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 
