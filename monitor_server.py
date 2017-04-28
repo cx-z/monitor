@@ -17,6 +17,8 @@ app.config.update(dict(
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
+user='admin'
+
 @app.route('/',methods=['GET','POST'])
 def login():
     error=None
@@ -30,12 +32,14 @@ def login():
         else:
             session['logged_in']=True
             app.config['USER_SOLE'][request.form['username']]='false'
+            user=request.form['username']
             return redirect(url_for('index'))
     return render_template('login.html',error=error)
     
 @app.route('/logout')
 def logout():
     session.pop('logged_in',None)
+    app.config['USER_SOLE'][user]='true'
     return redirect(url_for('login'))
     
 @app.route('/display')
