@@ -46,10 +46,14 @@
 <body>
   <div class=metanav>
 	{% if not session.logged_in %}
-        <br><br><br>
+        <div id="div1"><img src="../static/background3.jpg" /></div>
+        <br><br><br><br><br><br><br><br>
+        <hr>
         <center>
-        <a href="{{ url_for('login') }}" >log in</a>
+        <p id="invalid">此种访问方式非法，请点击登录链接</p>
+        <a id="jump" href="{{ url_for('login') }}" >log in</a>
         </center>
+        <hr>
 	{% else %}
 	
   <nav class="white" role="navigation">
