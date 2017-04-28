@@ -131,7 +131,7 @@ button:active {
     border: 0px solid #ef4300;
 }
 
-.error	{ background:#f0d6d6;padding:0.5em;}
+.errors	{ background:#f0d6d6;padding:0.5em;}
 
 .error {
     display: none;
