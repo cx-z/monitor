@@ -62,7 +62,7 @@ web的一套东西做前端
 
 4.退出函数logout()，退出数据展示的页面，并跳转到登录页面
 
-5.app.config.update(dict())中存有用户名和密码
+5.app.config.update(dict())中存有用户名和密码，用户名和密码一一对应放在字典中
 
 ### 3.3 test_index.py
 
